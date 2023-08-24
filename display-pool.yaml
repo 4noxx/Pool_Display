@@ -1,0 +1,377 @@
+esphome:
+  name: display-pool
+  friendly_name: Display_Pool
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "bOQBb5uzgpp0pBZ60UycW0rT/Xz4HTRhxx1zRPre5mg="
+
+ota:
+  password: "958a9b10fd1c6bd6226ae963b9a75013"
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Display-Pool Fallback Hotspot"
+    password: "XsHFQryNFgpF"
+
+captive_portal:
+  
+font:
+
+  - file: 'fonts/Roboto-Bold.ttf'
+    id: roboto_bold_22
+    size: 22
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']
+
+  - file: 'fonts/Roboto-Bold.ttf'
+    id: roboto_bold_27
+    size: 25
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']
+
+  - file: 'fonts/ConsolaMono-Book.ttf'
+    id: consolaMono_book_15
+    size: 15
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']       
+
+  - file: 'fonts/ConsolaMono-Bold.ttf'
+    id: consolaMono_bold_22
+    size: 22
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']      
+
+  - file: 'fonts/ConsolaMono-Bold.ttf'
+    id: consolaMono_bold_25
+    size: 25
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']
+
+  - file: 'fonts/ConsolaMono-Bold.ttf'
+    id: consolaMono_bold_35
+    size: 35
+    glyphs:
+      ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
+       '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+       'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S',
+       'T', 'U', 'V', 'W', 'X', 'Y', 'Z', ' ', 'a', 'b', 'c', 'd', 'e', 'f',
+       'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+       'u', 'v', 'w', 'x', 'y', 'z','å', 'ä', 'ö', '/','º','µ','³']
+
+
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: wifi_font_30
+    size: 30
+    glyphs: [
+      # Wifi
+      "\U000F092F", # mdi-wifi-strength-outline
+      "\U000F091F", # mdi-wifi-strength-1
+      "\U000F0922", # mdi-wifi-strength-2
+      "\U000F0925", # mdi-wifi-strength-3
+      "\U000F0928", # mdi-wifi-strength-4
+      ]
+      
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: display_font_30
+    size: 30
+    glyphs: [
+      "\U000F18D6", # mdi-sun-thermometer
+      "\U000F1A5F", # mdi-pool-thermometer
+      "\U000F0606", # mdi-pool
+      "\U000F1A73", # mdi-pv  
+      "\U000F1402", # mdi-pump
+      "\U000F1B22", # mdi-pump-off
+      "\U000F06E9", # mdi-light
+      "\U000F0E50", # mdi-light-off
+      ]
+  - file: 'fonts/materialdesignicons-webfont.ttf'
+    id: display_font_50
+    size: 50
+    glyphs: [
+      "\U000F18D6", # mdi-sun-thermometer
+      "\U000F1A5F", # mdi-pool-thermometer
+      "\U000F0606", # mdi-pool
+      "\U000F1A73", # mdi-pv  
+      "\U000F1402", # mdi-pump
+      "\U000F1B22", # mdi-pump-off
+      "\U000F06E9", # mdi-light
+      "\U000F0E50", # mdi-light-off
+      ]
+
+
+time:
+  - platform: homeassistant
+    id: homeassistant_time
+    timezone: Europe/Berlin
+
+spi:
+  clk_pin: 14
+  mosi_pin: 13
+
+binary_sensor:
+  - platform: homeassistant
+    id: Schalter_Pumpe
+    entity_id: switch.buero_ralf_stehlampe01
+    internal: true
+
+  - platform: homeassistant
+    id: Schalter_Licht
+    entity_id: switch.buero_ralf_stehlampe01
+    internal: true
+
+  - platform: homeassistant
+    id: Schalter_PH
+    entity_id: switch.partyraum_lichtleiste
+    internal: true
+
+  - platform: homeassistant
+    id: Schalter_ORP
+    entity_id: switch.partyraum_theke
+    internal: true    
+
+sensor:
+  - platform: wifi_signal
+    name: "WiFi Signal Sensor"
+    id: wifisignal
+
+  - platform: homeassistant
+    id: temp_aussen
+    entity_id: sensor.weewx_aussentemperatur
+
+  - platform: homeassistant
+    id: temp_wasser
+    entity_id: sensor.weewx_aussentemperatur
+
+  - platform: homeassistant
+    id: pv_anlage
+    entity_id: sensor.foxess_solar_power
+
+  - platform: homeassistant
+    id: pool_orp
+    entity_id: sensor.wf_192_168_1_156_orp
+
+  - platform: homeassistant
+    id: pool_ph
+    entity_id: sensor.wf_192_168_1_156_ph
+
+  - platform: homeassistant
+    id: pool_ph_min
+    entity_id: sensor.ph_wert_12_stunden_min  
+
+  - platform: homeassistant
+    id: pool_ph_max
+    entity_id: sensor.ph_wert_12_stunden_max
+
+  - platform: homeassistant
+    id: pool_orp_min
+    entity_id: sensor.orp_wert_12_stunden_min
+
+  - platform: homeassistant
+    id: pool_orp_max
+    entity_id: sensor.orp_wert_12_stunden_max
+
+  - platform: homeassistant
+    id: aussentemperatur_min
+    entity_id: sensor.aussentemperatur_12h_min
+
+  - platform: homeassistant
+    id: aussentemperatur_max
+    entity_id: sensor.aussentemperatur_12h_max
+
+graph:
+  - id: temp_aussen_graph
+    sensor: temp_aussen
+    duration: 12h
+    width: 100
+    height: 60
+    border: true
+    line_thickness: 2
+    line_type: solid
+
+  - id: temp_wasser_graph
+    sensor: temp_wasser
+    duration: 12h
+    width: 100
+    height: 60
+    border: true
+    line_thickness: 2
+    line_type: solid
+
+  - id: temp_pool_ph
+    sensor: pool_ph
+    duration: 12h
+    width: 100
+    height: 60
+    border: true
+    line_thickness: 2
+    line_type: solid
+
+  - id: temp_pool_orp
+    sensor: pool_orp
+    duration: 12h
+    width: 100
+    height: 60
+    border: true
+    line_thickness: 2
+    line_type: solid
+display:
+  - platform: waveshare_epaper
+    id: epaperdisplay
+    cs_pin: 15
+    dc_pin: 12
+    busy_pin: 16
+    reset_pin: 4
+    model: 4.20in
+    lambda: |-
+
+      if (id(homeassistant_time).now().hour > 8 & id(homeassistant_time).now().hour < 22) {
+        update_interval: 60s
+        } else {
+          update_interval: 300s
+        }
+
+      /* V Linie */ 
+      it.line(120, 0, 120, 300);
+
+      /* H Linie */ 
+      it.line(120, 75, 400, 75);
+      it.line(0, 150, 400, 150);
+      it.line(120, 225, 400, 225);
+
+
+      it.strftime(60, 40 , id(consolaMono_bold_35), TextAlign::BASELINE_CENTER , "%H:%M", id(homeassistant_time).now());
+
+      /* Aussentemperatur */
+      it.printf(155,55, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F18D6");
+      it.printf(240,45, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f°C", id(temp_aussen).state);
+      it.graph(295,5, id(temp_aussen_graph));
+
+      it.printf(240,15, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_max).state);
+      it.printf(240,65, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_min).state);
+  
+      /* Wassertemperatur */
+      it.printf(155,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1A5F");
+      it.printf(240,125, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f°C", id(temp_aussen).state);
+      it.graph(295,85, id(temp_wasser_graph));
+
+      /* PH */
+      it.printf(155,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
+      it.printf(155,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "PH");
+      it.printf(240,200, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph).state);
+      it.graph(295,160, id(temp_pool_ph));  
+
+      it.printf(240,170, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_min).state);
+      it.printf(240,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_max).state);
+      
+      /* ORP */
+      it.printf(155,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
+      it.printf(155,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "ORP");
+      it.printf(240,275, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp).state);
+      it.graph(295,235, id(temp_pool_ph)); 
+
+      it.printf(240,245, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_min).state);
+      it.printf(240,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_max).state);
+
+      /* PV */
+      it.printf(20,120, id(display_font_30), TextAlign::BASELINE_CENTER, "\U000F1A73");
+      it.printf(80,115, id(consolaMono_bold_22), TextAlign::BASELINE_CENTER, "%.1fkw", id(pv_anlage).state);
+ 
+       /* Pumpe Symbol An/Aus*/
+      if(id(Schalter_Pumpe).state) {
+        it.print(30,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1402");
+      } else {
+        it.print(30,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
+      }
+      it.printf(30,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "Pumpe");
+
+      /* Licht Symbol An/Aus*/
+      if(id(Schalter_Licht).state) {
+        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F06E9");
+      } else {
+        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0E50");
+      }            
+      it.printf(30,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "Licht");
+
+      /* PH Pumpe Symbol An/Aus*/
+      if(id(Schalter_PH).state) {
+        it.print(90,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1402");
+      } else {
+        it.print(90,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
+      }      
+      it.printf(90,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "PH");
+
+      /* ORP Pumpe Symbol An/Aus*/
+      if(id(Schalter_ORP).state) {
+        it.print(90,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1402");
+      } else {
+        it.print(90,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
+      }   
+      it.printf(90,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "ORP");
+
+      /* WIFI SIGNAL */ 
+      if(id(wifisignal).has_state()) {
+        int wifi_x = 60;
+        int wifi_y = 80;
+        if (id(wifisignal).state >= -50) {
+          // Excellent
+          it.print(wifi_x, wifi_y, id(wifi_font_30), TextAlign::BASELINE_CENTER, "\U000F0928");
+          ESP_LOGI("WiFi", "Exellent");
+        } else if (id(wifisignal).state  >= -60) {
+          // Good
+          it.print(wifi_x, wifi_y, id(wifi_font_30), TextAlign::BASELINE_CENTER, "\U000F0925");
+          ESP_LOGI("WiFi", "Good");
+        } else if (id(wifisignal).state  >= -75) {
+          // Fair
+          it.print(wifi_x, wifi_y, id(wifi_font_30), TextAlign::BASELINE_CENTER, "\U000F0922");
+          ESP_LOGI("WiFi", "Fair");
+        } else if (id(wifisignal).state  >= -100) {
+          // Weak
+          it.print(wifi_x, wifi_y, id(wifi_font_30), TextAlign::BASELINE_CENTER, "\U000F091F");
+          ESP_LOGI("WiFi", "Weak");
+        } else {
+          // Unlikely working signal
+          it.print(wifi_x, wifi_y, id(wifi_font_30), TextAlign::BASELINE_CENTER, "\U000F092F");
+          ESP_LOGI("WiFi", "Unlikely");
+        }
+        }
+    
+    
