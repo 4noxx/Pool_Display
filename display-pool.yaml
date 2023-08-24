@@ -155,6 +155,11 @@ binary_sensor:
     entity_id: switch.**********
     internal: true    
 
+  - platform: homeassistant
+    id: Schalter_WP
+    entity_id: switch.**********
+    internal: true  
+
 sensor:
   - platform: wifi_signal
     name: "WiFi Signal Sensor"
@@ -175,10 +180,10 @@ sensor:
   - platform: homeassistant
     id: pool_orp
     entity_id: sensor.**********
-    
+
   - platform: homeassistant
     id: pool_ph
-    entity_id: sensor.**********
+    entity_id: sensor.**********h
 
   - platform: homeassistant
     id: pool_ph_min
@@ -202,6 +207,14 @@ sensor:
 
   - platform: homeassistant
     id: aussentemperatur_max
+    entity_id: sensor.**********
+
+  - platform: homeassistant
+    id: wassertemperatur_min
+    entity_id: sensor.**********
+
+  - platform: homeassistant
+    id: wassertemperatur_max
     entity_id: sensor.**********
 
 graph:
@@ -277,14 +290,17 @@ display:
       it.printf(240,125, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f°C", id(temp_aussen).state);
       it.graph(295,85, id(temp_wasser_graph));
 
+      it.printf(240,90, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_max).state);
+      it.printf(240,140, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_min).state);
+
       /* PH */
       it.printf(155,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
       it.printf(155,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "PH");
       it.printf(240,200, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph).state);
       it.graph(295,160, id(temp_pool_ph));  
 
-      it.printf(240,170, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_min).state);
-      it.printf(240,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_max).state);
+      it.printf(240,170, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_max).state);
+      it.printf(240,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_min).state);
       
       /* ORP */
       it.printf(155,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
@@ -292,8 +308,8 @@ display:
       it.printf(240,275, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp).state);
       it.graph(295,235, id(temp_pool_ph)); 
 
-      it.printf(240,245, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_min).state);
-      it.printf(240,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_max).state);
+      it.printf(240,245, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_max).state);
+      it.printf(240,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_min).state);
 
       /* PV */
       it.printf(90,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1A73");
@@ -330,6 +346,14 @@ display:
         it.print(90,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
       }   
       it.printf(90,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "ORP");
+
+      /* Wärmepumpe Symbol An/Aus*/
+      if(id(Schalter_WP).state) {
+        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1402");
+      } else {
+        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
+      }   
+      it.printf(30,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "WP");
 
       /* WIFI SIGNAL */ 
       if(id(wifisignal).has_state()) {
