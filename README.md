@@ -1,4 +1,4 @@
-# Pool_Display
+# Pool Display Waveshare 4.2 epaper
 
 Fonts:
 - https://www.dafont.com/consola-mono.font
