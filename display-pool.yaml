@@ -290,8 +290,8 @@ display:
       it.printf(240,125, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f°C", id(temp_aussen).state);
       it.graph(295,85, id(temp_wasser_graph));
 
-      it.printf(240,90, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_max).state);
-      it.printf(240,140, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_min).state);
+      it.printf(240,95, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_max).state);
+      it.printf(240,145, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(wassertemperatur_min).state);
 
       /* PH */
       it.printf(155,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
