@@ -13,10 +13,10 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "bOQBb5uzgpp0pBZ60UycW0rT/Xz4HTRhxx1zRPre5mg="
+    key: "*********"
 
 ota:
-  password: "958a9b10fd1c6bd6226ae963b9a75013"
+  password: "*********"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -25,7 +25,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Display-Pool Fallback Hotspot"
-    password: "XsHFQryNFgpF"
+    password: "X*********"
 
 captive_portal:
   
@@ -142,7 +142,17 @@ time:
   - platform: homeassistant
     id: homeassistant_time
     timezone: Europe/Berlin
-
+    on_time:
+      - seconds: 0
+        minutes: /1 # Update jede Minute
+        hours: 8-22
+        then:
+          - component.update: epaperdisplay
+      - seconds: 0
+        minutes: /30 # Update alle 30 Minuten
+        hours: 0-7, 23
+        then:
+          - component.update: epaperdisplay
 spi:
   clk_pin: 14
   mosi_pin: 13
@@ -150,22 +160,22 @@ spi:
 binary_sensor:
   - platform: homeassistant
     id: Schalter_Pumpe
-    entity_id: switch.buero_ralf_stehlampe01
+    entity_id: switch.*********
     internal: true
 
   - platform: homeassistant
     id: Schalter_Licht
-    entity_id: switch.buero_ralf_stehlampe01
+    entity_id: switch.*********
     internal: true
 
   - platform: homeassistant
     id: Schalter_PH
-    entity_id: switch.partyraum_lichtleiste
+    entity_id: switch.*********
     internal: true
 
   - platform: homeassistant
     id: Schalter_ORP
-    entity_id: switch.partyraum_theke
+    entity_id: switch.*********
     internal: true    
 
 sensor:
@@ -175,47 +185,47 @@ sensor:
 
   - platform: homeassistant
     id: temp_aussen
-    entity_id: sensor.weewx_aussentemperatur
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: temp_wasser
-    entity_id: sensor.weewx_aussentemperatur
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pv_anlage
-    entity_id: sensor.foxess_solar_power
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pool_orp
-    entity_id: sensor.wf_192_168_1_156_orp
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pool_ph
-    entity_id: sensor.wf_192_168_1_156_ph
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pool_ph_min
-    entity_id: sensor.ph_wert_12_stunden_min  
+    entity_id: sensor.*********  
 
   - platform: homeassistant
     id: pool_ph_max
-    entity_id: sensor.ph_wert_12_stunden_max
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pool_orp_min
-    entity_id: sensor.orp_wert_12_stunden_min
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: pool_orp_max
-    entity_id: sensor.orp_wert_12_stunden_max
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: aussentemperatur_min
-    entity_id: sensor.aussentemperatur_12h_min
+    entity_id: sensor.*********
 
   - platform: homeassistant
     id: aussentemperatur_max
-    entity_id: sensor.aussentemperatur_12h_max
+    entity_id: sensor.*********
 
 graph:
   - id: temp_aussen_graph
@@ -261,13 +271,10 @@ display:
     busy_pin: 16
     reset_pin: 4
     model: 4.20in
+    update_interval: never
     lambda: |-
 
-      if (id(homeassistant_time).now().hour > 8 & id(homeassistant_time).now().hour < 22) {
-        update_interval: 60s
-        } else {
-          update_interval: 300s
-        }
+
 
       /* V Linie */ 
       it.line(120, 0, 120, 300);
