@@ -13,10 +13,10 @@ logger:
 # Enable Home Assistant API
 api:
   encryption:
-    key: "*********"
+    key: "**********"
 
 ota:
-  password: "*********"
+  password: "**********"
 
 wifi:
   ssid: !secret wifi_ssid
@@ -25,13 +25,13 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Display-Pool Fallback Hotspot"
-    password: "*********"
+    password: "**********"
 
 captive_portal:
   
 font:
-  - file: 'fonts/ConsolaMono-Book.ttf'
-    id: consolaMono_book_15
+  - file: 'fonts/ConsolaMono-Bold.ttf'
+    id: consolaMono_bold_15
     size: 15
     glyphs:
       ['&', '@', '!', ',', '.', '"', '%', '(', ')', '+', '-', '_', ':', '°', '0',
@@ -137,22 +137,22 @@ spi:
 binary_sensor:
   - platform: homeassistant
     id: Schalter_Pumpe
-    entity_id: switch.*********
+    entity_id: switch.**********
     internal: true
 
   - platform: homeassistant
     id: Schalter_Licht
-    entity_id: switch.*********
+    entity_id: switch.**********
     internal: true
 
   - platform: homeassistant
     id: Schalter_PH
-    entity_id: switch.*********
+    entity_id: switch.**********
     internal: true
 
   - platform: homeassistant
     id: Schalter_ORP
-    entity_id: switch.*********
+    entity_id: switch.**********
     internal: true    
 
 sensor:
@@ -162,47 +162,47 @@ sensor:
 
   - platform: homeassistant
     id: temp_aussen
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: temp_wasser
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: pv_anlage
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: pool_orp
-    entity_id: sensor.*********
-
+    entity_id: sensor.**********
+    
   - platform: homeassistant
     id: pool_ph
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: pool_ph_min
-    entity_id: sensor.*********  
+    entity_id: sensor.********** 
 
   - platform: homeassistant
     id: pool_ph_max
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: pool_orp_min
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: pool_orp_max
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: aussentemperatur_min
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
   - platform: homeassistant
     id: aussentemperatur_max
-    entity_id: sensor.*********
+    entity_id: sensor.**********
 
 graph:
   - id: temp_aussen_graph
@@ -269,8 +269,8 @@ display:
       it.printf(240,45, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f°C", id(temp_aussen).state);
       it.graph(295,5, id(temp_aussen_graph));
 
-      it.printf(240,15, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_max).state);
-      it.printf(240,65, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_min).state);
+      it.printf(240,15, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_max).state);
+      it.printf(240,65, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f°C", id(aussentemperatur_min).state);
   
       /* Wassertemperatur */
       it.printf(155,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1A5F");
@@ -279,25 +279,25 @@ display:
 
       /* PH */
       it.printf(155,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
-      it.printf(155,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "PH");
+      it.printf(155,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "PH");
       it.printf(240,200, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph).state);
       it.graph(295,160, id(temp_pool_ph));  
 
-      it.printf(240,170, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_min).state);
-      it.printf(240,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_max).state);
+      it.printf(240,170, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_min).state);
+      it.printf(240,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1f", id(pool_ph_max).state);
       
       /* ORP */
       it.printf(155,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0606");
-      it.printf(155,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "ORP");
+      it.printf(155,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "ORP");
       it.printf(240,275, id(consolaMono_bold_25), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp).state);
       it.graph(295,235, id(temp_pool_ph)); 
 
-      it.printf(240,245, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_min).state);
-      it.printf(240,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_max).state);
+      it.printf(240,245, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_min).state);
+      it.printf(240,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fmV", id(pool_orp_max).state);
 
       /* PV */
-      it.printf(20,120, id(display_font_30), TextAlign::BASELINE_CENTER, "\U000F1A73");
-      it.printf(80,115, id(consolaMono_bold_22), TextAlign::BASELINE_CENTER, "%.1fkw", id(pv_anlage).state);
+      it.printf(90,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1A73");
+      it.printf(90,145, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "%.1fkw", id(pv_anlage).state);
  
        /* Pumpe Symbol An/Aus*/
       if(id(Schalter_Pumpe).state) {
@@ -305,15 +305,15 @@ display:
       } else {
         it.print(30,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
       }
-      it.printf(30,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "Pumpe");
+      it.printf(30,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "Pumpe");
 
       /* Licht Symbol An/Aus*/
       if(id(Schalter_Licht).state) {
-        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F06E9");
+        it.print(30,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F06E9");
       } else {
-        it.print(30,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0E50");
+        it.print(30,130, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F0E50");
       }            
-      it.printf(30,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "Licht");
+      it.printf(30,145, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "Licht");
 
       /* PH Pumpe Symbol An/Aus*/
       if(id(Schalter_PH).state) {
@@ -321,7 +321,7 @@ display:
       } else {
         it.print(90,205, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
       }      
-      it.printf(90,220, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "PH");
+      it.printf(90,220, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "PH");
 
       /* ORP Pumpe Symbol An/Aus*/
       if(id(Schalter_ORP).state) {
@@ -329,7 +329,7 @@ display:
       } else {
         it.print(90,280, id(display_font_50), TextAlign::BASELINE_CENTER, "\U000F1B22");
       }   
-      it.printf(90,295, id(consolaMono_book_15), TextAlign::BASELINE_CENTER, "ORP");
+      it.printf(90,295, id(consolaMono_bold_15), TextAlign::BASELINE_CENTER, "ORP");
 
       /* WIFI SIGNAL */ 
       if(id(wifisignal).has_state()) {
