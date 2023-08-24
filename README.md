@@ -7,15 +7,16 @@ Fonts:
 copy fonts to 
 .\config\esphome\fonts
 
-ePaper Display Pin	ESP32 Pin
-BUSY	GPIO16
-RST	GPIO04
-DC	GPIO12
-CS	GPIO15
-CLK	GPIO14
-DIN	GPIO13
-GND	GND
-3.3v	3.3v
+|ePaper Display Pin| ESP32 Pin|
+|--|--|
+| BUSY | GPIO16 |
+| RST | GPIO04  |
+| DC | GPIO12 |
+| CS | GPIO15 |
+| CLK | GPIO14 |
+| DIN | GPIO13 |
+| GND | GND |
+| 3.3v | 3.3v |
 
 ![Back](https://github.com/4noxx/Pool_Display/assets/12627059/37a42738-2712-4000-a528-e30f6d7fbe16)
 
